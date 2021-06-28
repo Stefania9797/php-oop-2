@@ -1,65 +1,69 @@
 <?php
-//classe prodotto
-class Product{
+//classi
+
+//prodotti
+class Product {
     protected $name;
     protected $desc;
     protected $price;
-    protected $quantity;
 
-    function __construct($name, $desc, $price, $quantity)
-    {
+    public function __construct(string $name, string $desc, string $price) {
         $this->name = $name;
         $this->desc = $desc;
         $this->price = $price;
-        $this->quantity = $quantity;
-    }
-    public function getPrice() {
-        return $this->price;
     }
 }
+//user
+class User {
+    protected $name;
+    protected $username;
+    protected $email;
+    private $password;
 
-//classe person (PARENT)
-class Person{
-    public $name;
-    public $lastname;
-
-
-    public function __construct($name,$lastname)
-    {
+    public function __construct(string $name, string $username, string $email, string $password) {
         $this->name = $name;
-        $this->lastname = $lastname;
-    }
-
-}
-//classe premium user (CHILD)
-class Premium_user extends Person{
-    public $nickname;
-    public $email;
-    public $password;
-
-    public function __construct($name, $lastname, $nickname, $email, $password)
-    {
-        //estendo il constructor di person anche a user
-        //e poi definisco le nuove caratteristiche
-        parent::__construct($name, $lastname);
-
-        $this->nickname = $nickname;
+        $this->username = $username;
         $this->email = $email;
         $this->password = $password;
     }
-    //Solo premium user ha accesso a questa funzione
-    public function subscribe()
-    {
-        return "Mi iscrivo alla newsletter";
-    }
-    public function delete()
-    {
-        return "Cancella il tuo profilo";
+}
+//carta di credito
+class CreditCard {
+    protected $number;
+    private $cvc;
+
+    public function __construct(string $number, int $cvc) {
+        $this->number = $number;
+        $this->cvc = $cvc;
     }
 }
+// classe CHILD di User
+class Client extends User {
+    //set carta di credito
+    protected $creditCards = [];
+    public function addCreditCard($creditCard) {
+        $this->creditCards = $creditCard;
+    }
+    //get carta di credito
+    public function getCreditCard() {
+        return $this->creditCards;
+    }
+}
+// istanze
 
-//istanze
-$laptop = new Product("Laptop HP", "Lorem impum dolor", 600, 20);
-var_dump($laptop);
+$cuffie = new Product('Cuffie Samsung', "lorem ipsum dolor", '50');
+echo "<pre>";
+var_dump($cuffie);
+echo "</pre>";
 
-$stefania = new Premium_user("Stefania","Mastrella","stefania97","stefania@example.it","123456");
+$maria = new Client('Maria', 'Bianchi', 'MariaB', 'maria@example.it', '1234');
+echo "<pre>";
+var_dump($maria);
+echo "</pre>";
+
+$newCreditCard = new CreditCard('4858XXX', 035);
+
+$maria->addCreditCard($newCreditCard);
+echo "<pre>";
+var_dump($maria->getCreditCard());
+echo "</pre>";
