@@ -9,4 +9,16 @@ class Product {
         $this->desc = $desc;
         $this->price = $price;
     }
+    public function getName()
+    {
+       return $this->name;
+    }
+    public function getDesc()
+    {
+       return $this->desc;
+    }
+    public function getPrice()
+    {
+       return $this->price;
+    }
 }
