@@ -2,53 +2,14 @@
 //classi
 
 //prodotti
-class Product {
-    protected $name;
-    protected $desc;
-    protected $price;
-
-    public function __construct(string $name, string $desc, string $price) {
-        $this->name = $name;
-        $this->desc = $desc;
-        $this->price = $price;
-    }
-}
+require_once ('./classes/product.php');
 //user
-class User {
-    protected $name;
-    protected $username;
-    protected $email;
-    private $password;
+require_once ('./classes/user.php');
+// client (CHILD di user)
+require_once ('./classes/client.php');
+//credit card
+require_once ('./classes/creditcard.php');
 
-    public function __construct(string $name, string $username, string $email, string $password) {
-        $this->name = $name;
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-    }
-}
-//carta di credito
-class CreditCard {
-    protected $number;
-    private $cvc;
-
-    public function __construct(string $number, int $cvc) {
-        $this->number = $number;
-        $this->cvc = $cvc;
-    }
-}
-// classe CHILD di User
-class Client extends User {
-    //set carta di credito
-    protected $creditCards = [];
-    public function addCreditCard($creditCard) {
-        $this->creditCards = $creditCard;
-    }
-    //get carta di credito
-    public function getCreditCard() {
-        return $this->creditCards;
-    }
-}
 // istanze
 
 $cuffie = new Product('Cuffie Samsung', "lorem ipsum dolor", '50');
